@@ -1,21 +1,16 @@
-QR Code Library
+QR Code Library using ImageSharp
 
-Author: Uzi Granot
+Author: Deepak Sharma
 Original Version: 1.0
-Date: June 30, 2018
-Copyright (C) 2018-2019 Uzi Granot. All Rights Reserved
-https://www.codeproject.com/Articles/1250071/QR-Code-Encoder-and-Decoder-NET-Framework-Standard
+Date: Jan 16, 2022
 
 QR Code Library C# class library is free software.
 Software developed by this author is licensed under CPOL 1.02.
-Some portions of the QRCodeVideoDecoder are licensed under GNU Lesser General Public License v3.0.
 
-The solution is made of 5 projects:
-1. QRCodeDecoderLibrary: QR code decoding.
-2. QRCodeEncodeLibrary: QR code encoding.
-3. QRCodeSharedLibrary: Shared enums and types
-4. QRCodeEncoderDemo
-5. QRCodeDecoderDemo
+The solution is made of 3 projects:
+1. QRCodeDecoderLibrary: QR code decoding
+2. QRCodeSharedLibrary: Shared enums and types
+3. DecoderTest - NUnit smoke tests
 
 The main points of CPOL 1.02 subject to the terms of the License are:
 

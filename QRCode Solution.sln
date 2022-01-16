@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32002.261
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EDDCBA37-7DB7-47DC-864C-7F5A75FFB142}"
 EndProject
@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeSharedLibrary", "src\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj", "{D74FE6C3-55F3-4857-BF87-580290F6375A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeDecoderLibrary", "src\QRCodeDecoderLibrary\QRCodeDecoderLibrary.csproj", "{33C1C968-3E83-44F1-A243-2908D4E1221E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QRCodeDecoderLibrary-ImageSharp", "src\QRCodeDecoderLibrary\QRCodeDecoderLibrary-ImageSharp.csproj", "{33C1C968-3E83-44F1-A243-2908D4E1221E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReleaseNotes", "ReleaseNotes", "{75C52E84-CBFE-4A8B-959F-DA9489CA2C2E}"
 	ProjectSection(SolutionItems) = preProject

@@ -4,7 +4,6 @@ namespace DecoderTest
 {
     public class SmokeTests
     {
-
         [Test]
         public void SmokeTest()
         {
