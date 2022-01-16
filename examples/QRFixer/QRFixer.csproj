@@ -15,8 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\QRCodeDecoderLibrary\QRCodeDecoderLibrary.csproj" />
-    <ProjectReference Include="..\..\src\QRCodeEncoderLibrary\QRCodeEncoderLibrary.csproj" />
-    <ProjectReference Include="..\..\src\QRCodeFixerLibrary\QRCodeFixerLibrary.csproj" />
     <ProjectReference Include="..\..\src\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj" />
   </ItemGroup>
 

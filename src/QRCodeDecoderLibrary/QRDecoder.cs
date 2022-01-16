@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using QRCodeSharedLibrary;
 using Stef.Validation;
+using SixLabors.ImageSharp.Processing;
 
 namespace QRCodeDecoderLibrary
 {
@@ -121,7 +121,7 @@ namespace QRCodeDecoderLibrary
         /// </summary>
         /// <param name="inputImage">Input image</param>
         /// <returns>Output byte arrays</returns>
-        public byte[][] ImageDecoder(Bitmap inputImage)
+        public byte[][] ImageDecoder(SixLabors.ImageSharp.Image inputImage)
         {
             int Start;
             try
@@ -137,7 +137,7 @@ namespace QRCodeDecoderLibrary
                 _logger.LogDebug("Convert image to black and white");
 
                 // convert input image to black and white boolean image
-                if (!ConvertImageToBlackAndWhite(inputImage))
+                if (!ConvertImageToBlackAndWhite(inputImage.CloneAs<SixLabors.ImageSharp.PixelFormats.Rgb24>()))
                 {
                     return null;
                 }
@@ -261,49 +261,29 @@ namespace QRCodeDecoderLibrary
         ////////////////////////////////////////////////////////////////////
         // Convert image to black and white boolean matrix
         ////////////////////////////////////////////////////////////////////
-        internal bool ConvertImageToBlackAndWhite(Bitmap InputImage)
+        internal bool ConvertImageToBlackAndWhite(SixLabors.ImageSharp.Image<SixLabors.ImageSharp.PixelFormats.Rgb24> InputImage)
         {
-            // lock image bits
-            var BitmapData = InputImage.LockBits(new Rectangle(0, 0, ImageWidth, ImageHeight), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-
-            // address of first line
-            IntPtr BitArrayPtr = BitmapData.Scan0;
-
-            // length in bytes of one scan line
-            int ScanLineWidth = BitmapData.Stride;
-            if (ScanLineWidth < 0)
-            {
-                _logger.LogDebug("Convert image to back and white array. Invalid input image format (upside down).");
-                return false;
-            }
-
-            // image total bytes
-            int TotalBytes = ScanLineWidth * ImageHeight;
-            byte[] BitmapArray = new byte[TotalBytes];
-
-            // Copy the RGB values into the array.
-            Marshal.Copy(BitArrayPtr, BitmapArray, 0, TotalBytes);
-
-            // unlock image
-            InputImage.UnlockBits(BitmapData);
-
+            // address of first line            
             // allocate gray image 
             byte[,] GrayImage = new byte[ImageHeight, ImageWidth];
             int[] GrayLevel = new int[256];
 
             // convert to gray
-            int Delta = ScanLineWidth - 3 * ImageWidth;
-            int BitmapPtr = 0;
             for (int Row = 0; Row < ImageHeight; Row++)
             {
+                int BitmapPtr = 0;
+                
+                var span = InputImage.GetPixelRowSpan(Row);
+
+                byte[] rawData = MemoryMarshal.AsBytes(span).ToArray();
+                
                 for (int Col = 0; Col < ImageWidth; Col++)
-                {
-                    int Module = (30 * BitmapArray[BitmapPtr] + 59 * BitmapArray[BitmapPtr + 1] + 11 * BitmapArray[BitmapPtr + 2]) / 100;
+                {   
+                    int Module = (30 * rawData[BitmapPtr] + 59 * rawData[BitmapPtr + 1] + 11 * rawData[BitmapPtr + 2]) / 100;
                     GrayLevel[Module]++;
                     GrayImage[Row, Col] = (byte)Module;
                     BitmapPtr += 3;
                 }
-                BitmapPtr += Delta;
             }
 
             // gray level cutoff between black and white

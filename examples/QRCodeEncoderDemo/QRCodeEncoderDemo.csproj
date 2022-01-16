@@ -163,10 +163,6 @@
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\QRCodeEncoderLibrary\QRCodeEncoderLibrary.csproj">
-      <Project>{c4a05c67-7b00-4c92-9364-d4c17a9a30d9}</Project>
-      <Name>QRCodeEncoderLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\QRCodeSharedLibrary\QRCodeSharedLibrary.csproj">
       <Project>{d74fe6c3-55f3-4857-bf87-580290f6375a}</Project>
       <Name>QRCodeSharedLibrary</Name>
