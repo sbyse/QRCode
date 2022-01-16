@@ -5,7 +5,7 @@ Original readme can be found [here](https://github.com/StefH/QRCode#readme). Thi
 
 | Name | NuGet
 | - | - |
-| `QRCodeDecoder` | [[NuGet](https://www.nuget.org/packages/QRCodeDecoder-ImageSharp)]
+| `QRCodeDecoder-ImageSharp` | [[NuGet](https://www.nuget.org/packages/QRCodeDecoder-ImageSharp)]
 
 ## QRDecoder
 
