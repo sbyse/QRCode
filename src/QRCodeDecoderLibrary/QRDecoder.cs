@@ -269,22 +269,25 @@ namespace QRCodeDecoderLibrary
             int[] GrayLevel = new int[256];
 
             // convert to gray
-            for (int Row = 0; Row < ImageHeight; Row++)
+            InputImage.ProcessPixelRows(pixelAccessor =>
             {
-                int BitmapPtr = 0;
-                
-                var span = InputImage.GetPixelRowSpan(Row);
+                for (int y = 0; y < pixelAccessor.Height; y++)
+                {
+                    int BitmapPtr = 0;
 
-                byte[] rawData = MemoryMarshal.AsBytes(span).ToArray();
-                
-                for (int Col = 0; Col < ImageWidth; Col++)
-                {   
-                    int Module = (30 * rawData[BitmapPtr] + 59 * rawData[BitmapPtr + 1] + 11 * rawData[BitmapPtr + 2]) / 100;
-                    GrayLevel[Module]++;
-                    GrayImage[Row, Col] = (byte)Module;
-                    BitmapPtr += 3;
+                    var span = pixelAccessor.GetRowSpan(y);
+
+                    byte[] rawData = MemoryMarshal.AsBytes(span).ToArray();
+
+                    for (int x = 0; x < pixelAccessor.Width; x++)
+                    {
+                        int Module = (30 * rawData[BitmapPtr] + 59 * rawData[BitmapPtr + 1] + 11 * rawData[BitmapPtr + 2]) / 100;
+                        GrayLevel[Module]++;
+                        GrayImage[y, x] = (byte)Module;
+                        BitmapPtr += 3;
+                    }
                 }
-            }
+            });
 
             // gray level cutoff between black and white
             int LevelStart;
